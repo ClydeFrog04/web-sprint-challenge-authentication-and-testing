@@ -2,9 +2,9 @@
 // import supertest from "supertest";
 // import {server} from "../server";
 
-import {dbConfig} from "../database/dbConfig";
+import {dbConfig} from "../../database/dbConfig";
 import supertest from "supertest";
-import {server} from "../api/server";
+import {server} from "../../api/server";
 
 
 afterAll(async () => {

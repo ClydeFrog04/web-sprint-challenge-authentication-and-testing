@@ -20,5 +20,4 @@ export const restrict = (req: Request, res: Response, next: NextFunction) => {
     } catch (e) {
         console.log(e.stack);
     }
-
 };
