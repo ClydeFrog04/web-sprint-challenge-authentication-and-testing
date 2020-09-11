@@ -1,8 +1,9 @@
-const axios = require('axios');
+import axios from "axios";
+import express, {Request, Response, NextFunction} from "express";
 
-const router = require('express').Router();
+export const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req:Request, res:Response, next:NextFunction) => {
   const requestOptions = {
     headers: { accept: 'application/json' },
   };
@@ -16,5 +17,3 @@ router.get('/', (req, res) => {
       res.status(500).json({ message: 'Error Fetching Jokes', error: err });
     });
 });
-
-module.exports = router;
