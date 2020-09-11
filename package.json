@@ -46,6 +46,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.0",
     "sqlite3": "^4.1.1",
+    "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
   },
