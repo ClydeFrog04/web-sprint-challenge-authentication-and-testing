@@ -16,7 +16,7 @@ describe("Create a new user", () => {
         it("gets the created user back from the server", async () => {
             const newUser = {username: "Eevee", password: "isTheBest"};
             const res = await supertest(server)
-                .post("/api/auth")
+                .post("/api/auth/register")
                 .set("content-type", "application/json")
                 .send(JSON.stringify(newUser));
 
@@ -30,7 +30,7 @@ describe("Create a new user", () => {
         it("gets an error message and 400 back from the server", async () => {
             const newUser = {username: "Eevee"};
             const res = await supertest(server)
-                .post("/api/auth")
+                .post("/api/auth/register")
                 .set("content-type", "application/json")
                 .send(JSON.stringify(newUser));
 

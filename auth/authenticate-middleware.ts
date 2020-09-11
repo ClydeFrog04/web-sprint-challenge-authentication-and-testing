@@ -21,3 +21,11 @@ export const restrict = (req: Request, res: Response, next: NextFunction) => {
         console.log(e.stack);
     }
 };
+
+export const validateUserInfo = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userExists = await
+    } catch (e) {
+        console.log(e.stack);
+    }
+}
