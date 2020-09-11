@@ -25,4 +25,19 @@ describe("Create a new user", () => {
             expect(res.body.username).toBe(newUser.username);
         });
     });
+
+    describe("When incomplete information is provided", () => {
+        it("gets an error message and 400 back from the server", async () => {
+            const newUser = {username: "Eevee"};
+            const res = await supertest(server)
+                .post("/api/auth")
+                .set("content-type", "application/json")
+                .send(JSON.stringify(newUser));
+
+            //not testing the password because that should never be returned to the user
+            expect(res.status).toBe(400);
+            expect(res.body.username).toBe(undefined);
+            expect(res.body.error).toBe("Username or password missing");
+        });
+    });
 });
