@@ -14,6 +14,7 @@ export async function findById(id:string){
 }
 
 export async function createUser(user:IUser) {
+    console.log("user to insert ", user);
     const [id] = await dbConfig("users").insert(user);
     return findById(id);
 }
@@ -23,9 +24,9 @@ export function getUsers() {
 
 }
 
-export function findBy(filter:any) {
+export function findByUsername(username:string) {
     return dbConfig("users")
         .select("id", "username", "password")
-        .where(filter);
+        .where({username});
 
 }

@@ -36,6 +36,7 @@
   "homepage": "https://github.com/LambdaSchool/Sprint-Challenge-Authentication#readme",
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.7",
     "@types/express": "^4.17.8",
     "@types/helmet": "0.0.48",
@@ -45,6 +46,7 @@
     "@types/node": "^14.10.0",
     "@types/supertest": "^2.0.10",
     "axios": "^0.19.2",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^3.22.0",

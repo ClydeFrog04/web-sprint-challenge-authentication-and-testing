@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 
-
 import {authRouter} from "../auth/auth-router";
 import {jokesRouter} from "../jokes/jokes-router";
 import * as authenticate from "../auth/authenticate-middleware";
