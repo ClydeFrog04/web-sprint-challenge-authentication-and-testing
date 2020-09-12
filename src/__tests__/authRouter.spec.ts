@@ -7,6 +7,10 @@ import supertest from "supertest";
 import {server} from "../../api/server";
 
 
+beforeEach(async () => {
+    await dbConfig.seed.run();
+});
+
 afterAll(async () => {
     await dbConfig.destroy();
 });
@@ -35,7 +39,7 @@ describe("Create a new user", () => {
                 .send(JSON.stringify(newUser));
 
             //not testing the password because that should never be returned to the user
-            expect(res.status).toBe(400);
+            expect(res.status).toBe(409);
             expect(res.body.username).toBe(undefined);
             expect(res.body.error).toBe("Username or password missing");
         });
