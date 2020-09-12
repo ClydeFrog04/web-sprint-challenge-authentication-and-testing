@@ -28,7 +28,6 @@ export const validateUserInfo = async (req: Request, res: Response, next: NextFu
         if (!req.body.username || !req.body.password) return res.status(409).json({error: "Username or password missing"});
 
         const userExists = await authModel.findByUsername(req.body.username).first();
-        console.log("Userexists", userExists);
 
         if (!userExists) next();
         else return res.status(400).json({error: "Username already taken"});

@@ -10,7 +10,6 @@ export const authRouter = express.Router();
 authRouter.post("/register", authMiddleware.validateUserInfo, async (req, res) => {
     // implement registration
     try {
-        console.log("getting here");
         const {username, password} = req.body;
 
         const newUser = await authModel.createUser({
@@ -32,6 +31,8 @@ authRouter.post("/login", async (req, res) => {
         const {username, password} = req.body;
         const user = await authModel.findByUsername(username).first();
 
+        console.log(user);
+
         if (!user) return res.status(401).json({error: "Username invalid"});
 
         const passValid = await bcrypt.compare(password, user.password);
@@ -45,7 +46,7 @@ authRouter.post("/login", async (req, res) => {
         }, process.env.JWT_SECRET);
 
         res.cookie("token", token);
-        res.status(200).json({token, userId: user.id});
+        res.status(200).json({username, token, userId: user.id});
 
     } catch (e) {
         console.log(e.stack);

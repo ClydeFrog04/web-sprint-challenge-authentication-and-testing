@@ -5,6 +5,7 @@
 import {dbConfig} from "../../database/dbConfig";
 import supertest from "supertest";
 import {server} from "../../api/server";
+import bcrypt from "bcryptjs";
 
 
 beforeEach(async () => {
@@ -42,6 +43,47 @@ describe("Create a new user", () => {
             expect(res.status).toBe(409);
             expect(res.body.username).toBe(undefined);
             expect(res.body.error).toBe("Username or password missing");
+        });
+    });
+});
+
+describe("Logs a user in", () => {
+    describe("When valid login information is given", () => {
+        it("Gets a 200 from server and compares token", async () => {
+            const user = {username: "user1", password: "Pass1"};
+            const res = await supertest(server)
+                .post("/api/auth/login")
+                .set("content-type", "application/json")
+                .send(JSON.stringify(user));
+
+            expect(res.status).toBe(200);
+            expect(res.body.username).toBe(user.username);
+        });
+    });
+
+    describe("When invalid login information is given", () => {
+        it("Gets Username invalid from server", async () => {
+            const user = {username: "eevee", password: "Pass1"};
+            const res = await supertest(server)
+                .post("/api/auth/login")
+                .set("content-type", "application/json")
+                .send(JSON.stringify(user));
+
+            expect(res.status).toBe(401);
+            expect(res.body.username).toBe(undefined);
+            expect(res.body.error).toBe("Username invalid");
+        });
+
+        it("Gets Password invalid from server", async () => {
+            const user = {username: "user1", password: "notThisPassword"};
+            const res = await supertest(server)
+                .post("/api/auth/login")
+                .set("content-type", "application/json")
+                .send(JSON.stringify(user));
+
+            expect(res.status).toBe(401);
+            expect(res.body.username).toBe(undefined);
+            expect(res.body.error).toBe("Password invalid");
         });
     });
 });

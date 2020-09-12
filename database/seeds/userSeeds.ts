@@ -7,7 +7,7 @@ export async function seed(knex: Knex): Promise<void> {
 
     // Inserts seed entries
     await knex("users").insert([
-        {id: 0, userName: "user1", password: await bcrypt.hash("Pass1", 1)},
-        {id: 1, userName: "user2", password: await bcrypt.hash("Pass2", 1)},
+        {id: 0, username: "user1", password: "$2a$13$j1GVJANWjvqYwZjm3FG3weXyNZaWZhGNSwL3zGwe/vm/yW/hHouse"},
+        {id: 1, username: "user2", password: "$2a$13$y.vtPsCkajlAIzGXWm6W3.gpDWSZoDxz21YMUFOZ5lCESHTQLJ.b2"},
     ]);
 }
