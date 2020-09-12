@@ -4,6 +4,7 @@
 */
 import {Request, Response, NextFunction} from "express";
 import jwt from "jsonwebtoken";
+import * as authModel from "../auth/authModel";
 
 export const restrict = (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -13,8 +14,8 @@ export const restrict = (req: Request, res: Response, next: NextFunction) => {
 
         if (!token) return res.status(401).json(authError);
 
-        jwt.verify(token, process.env.JWT_SECRET!, (err:any, decoded:any) =>{
-            if(err) return res.status(401).json(authError);
+        jwt.verify(token, process.env.JWT_SECRET!, (err: any, decoded: any) => {
+            if (err) return res.status(401).json(authError);
             next();
         });
     } catch (e) {
@@ -24,8 +25,14 @@ export const restrict = (req: Request, res: Response, next: NextFunction) => {
 
 export const validateUserInfo = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const userExists = await
+        if(!req.body.username || !req.body.password) return res.status(409).json({error: "Username or password missing"});
+
+        const userExists = await authModel.findBy(req.body.username);
+        console.log("Userexists", userExists);
+
+        if (userExists) next();
+        else return res.status(400).json({error: "Username already taken"});
     } catch (e) {
         console.log(e.stack);
     }
-}
+};

@@ -6,7 +6,7 @@ interface IUser{
     password: string;
 }
 
-export async function findById(id:number){
+export async function findById(id:string){
     return dbConfig("users")
         .select("id", "username")
         .where({id})
@@ -18,7 +18,7 @@ export async function createUser(user:IUser) {
     return findById(id);
 }
 
-export function find() {
+export function getUsers() {
     return dbConfig("users").select("id", "username");
 
 }
